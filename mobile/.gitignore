@@ -1,0 +1,11 @@
+env.json
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+.pub-cache/
+.pub/
+*.iml
+ios/Pods/
+ios/.symlinks/

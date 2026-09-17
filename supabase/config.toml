@@ -1,0 +1,26 @@
+# Configuración de Supabase CLI para desarrollo local.
+# Instala la CLI (https://supabase.com/docs/guides/cli) y corre:
+#   supabase start   -> levanta Postgres + Auth + Studio en Docker, local
+#   supabase db reset -> aplica migrations/ + seed/seed.sql desde cero
+# Para producción, este archivo no se usa: las migraciones se aplican con
+# `supabase db push` apuntando a tu proyecto remoto (ver docs/DESPLIEGUE.md).
+
+project_id = "pos-abarrotes"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+
+[studio]
+enabled = true
+port = 54323
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000"]
+jwt_expiry = 3600
+enable_signup = false

@@ -1,0 +1,35 @@
+name: Web CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/**"]
+  pull_request:
+    paths: ["web/**"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+          cache-dependency-path: web/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - name: Build (con variables de entorno de prueba)
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "placeholder"
+        run: npm run build
+
+  # El despliegue real a producción lo hace Vercel automáticamente al conectar
+  # el repo de GitHub (ver docs/DESPLIEGUE.md) — no se necesita un job de
+  # deploy aquí. Este workflow solo evita que llegue código roto a main.

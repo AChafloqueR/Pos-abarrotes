@@ -1,0 +1,49 @@
+name: Mobile CI
+
+on:
+  push:
+    branches: [main]
+    paths: ["mobile/**"]
+  pull_request:
+    paths: ["mobile/**"]
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+        continue-on-error: true # habilita esto sin continue-on-error cuando agregues tests
+
+  build-apk:
+    runs-on: ubuntu-latest
+    needs: analyze
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - run: flutter pub get
+
+      # env.json de prueba solo para que el build no falle en CI; el APK real
+      # para producción se genera localmente con tus credenciales de Supabase
+      # (ver docs/DESPLIEGUE.md).
+      - name: Crear env.json de CI
+        run: echo '{"SUPABASE_URL":"https://placeholder.supabase.co","SUPABASE_ANON_KEY":"placeholder"}' > env.json
+
+      - run: flutter build apk --debug --dart-define-from-file=env.json

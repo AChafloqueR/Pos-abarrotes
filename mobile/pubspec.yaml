@@ -1,0 +1,38 @@
+name: pos_abarrotes
+description: App móvil de punto de venta para la tienda de abarrotes.
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+
+  # Backend
+  supabase_flutter: ^2.5.6
+
+  # Estado
+  provider: ^6.1.2
+
+  # Formato de moneda/fecha en español
+  intl: ^0.19.0
+
+  # Impresión de tickets ESC/POS por Bluetooth (ticketeras térmicas 58/80mm)
+  esc_pos_utils_plus: ^2.0.4
+  print_bluetooth_thermal: ^1.1.4
+
+  # Permisos (Bluetooth en Android 12+)
+  permission_handler: ^11.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/

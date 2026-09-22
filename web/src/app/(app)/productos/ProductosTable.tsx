@@ -24,10 +24,12 @@ export default function ProductosTable({
   productosIniciales,
   categorias,
   soloLectura,
+  tiendaId, 
 }: {
   productosIniciales: Producto[];
   categorias: Categoria[];
   soloLectura: boolean;
+  tiendaId: string;
 }) {
   const supabase = createClient();
   const [productos, setProductos] = useState(productosIniciales);
@@ -61,6 +63,7 @@ export default function ProductosTable({
       ...parsed.data,
       codigo_barras: parsed.data.codigo_barras || null,
       categoria_id: parsed.data.categoria_id || null,
+      tienda_id: tiendaId,
     };
 
     const { error } = editando

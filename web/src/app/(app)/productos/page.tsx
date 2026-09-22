@@ -10,7 +10,7 @@ export default async function ProductosPage() {
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return { data: null };
-      return supabase.from("perfiles").select("rol").eq("id", user.id).single();
+      return supabase.from("perfiles").select("rol, tienda_id").eq("id", user.id).single();
     })(),
   ]);
 
@@ -27,6 +27,7 @@ export default async function ProductosPage() {
         productosIniciales={productos ?? []}
         categorias={categorias ?? []}
         soloLectura={perfil?.rol !== "propietario"}
+        tiendaId={perfil?.tienda_id ?? ""}
       />
     </div>
   );

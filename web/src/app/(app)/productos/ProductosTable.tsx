@@ -24,7 +24,7 @@ export default function ProductosTable({
   productosIniciales,
   categorias,
   soloLectura,
-  tiendaId, 
+  tiendaId,
 }: {
   productosIniciales: Producto[];
   categorias: Categoria[];

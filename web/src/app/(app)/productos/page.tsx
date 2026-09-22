@@ -24,11 +24,11 @@ export default async function ProductosPage() {
       </div>
 
       <ProductosTable
-        productosIniciales={productos ?? []}
-        categorias={categorias ?? []}
-        soloLectura={perfil?.rol !== "propietario"}
-        tiendaId={perfil?.tienda_id ?? ""}
-      />
+  productosIniciales={productos ?? []}
+  categorias={categorias ?? []}
+  soloLectura={perfil?.rol !== "propietario"}
+  tiendaId={perfil?.tienda_id ?? ""}
+/>
     </div>
   );
 }
